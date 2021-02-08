@@ -53,3 +53,32 @@ class HelloViewset(viewsets.ViewSet):
         ]
     
         return Response({'Message':'Hello','a_viewset':a_viewset})
+    
+    def create(self,request):
+        """Create a new message with hello"""
+        
+        serializer = serializers.HelloSerializer(data=request.data)
+        
+        if serializer.is_valid():
+            name = serializer.request.get('name')
+            message = 'Hello {0}'.format(name)
+            return Response({'message':message})
+        else:
+            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+        
+    def retrieve(self, request, pk=None):
+        """Handle getting an object by its ID"""
+        return Response({'http.method': 'GET'})
+    
+    def update(self, request, pk=None):
+        """Update an object"""
+        return Response({'http.method':'PUT'})
+    
+    def partial_update(self, request, pk=None):
+        """Update an object"""
+        return Response({'http.method':'PATCH'})
+    
+    def destroy(self,request, pk=None):
+        """Update an object"""
+        return Response({'http.method':'DELETE'})
+    
