@@ -5,6 +5,10 @@ from . import  serializers
 from . import models
 from rest_framework import status
 from rest_framework import viewsets
+from rest_framework.authentication import TokenAuthentication
+from rest_framework import filters
+from . import permissions
+
 # Create your views here.
 
 class HelloApiView(APIView):
@@ -85,6 +89,12 @@ class HelloViewset(viewsets.ViewSet):
     
     
 class UserProfileViewSet(viewsets.ModelViewSet):
-    
+    """Handle Creating Update Profile"""
+
     serializer_class = serializers.UserProfileSerializer
     queryset = models.UserProfile.objects.all()
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (permissions.UserOwnProfile,)
+    
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name','email',)
