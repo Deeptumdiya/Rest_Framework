@@ -21,6 +21,7 @@ from . import views
 
 router  = DefaultRouter()
 router.register('hello-viewset', views.HelloViewset, basename='hello-viewset')
+router.register('profile',views.UserProfileViewSet)
 
 
 urlpatterns = [
