@@ -22,7 +22,7 @@ from . import views
 router  = DefaultRouter()
 router.register('hello-viewset', views.HelloViewset, basename='hello-viewset')
 router.register('profile',views.UserProfileViewSet)
-
+router.register('login',views.LoginViewSet, basename='login')
 
 urlpatterns = [
     path('api-view/',views.HelloApiView.as_view()),

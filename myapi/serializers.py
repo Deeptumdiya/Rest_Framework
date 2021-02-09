@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from . import  models
-from django.contrib.auth.models import AbstractUser
 
 class HelloSerializer(serializers.Serializer):
     """serializer a name field for testing APIView."""
@@ -22,7 +21,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
             email = validated_Data['email'],
             name = validated_Data['name'])
         
-        # user.set_password(validated_Data['password'])
+        user.set_password(validated_Data['password'])
         user.save()
         
         return user
